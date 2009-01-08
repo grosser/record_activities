@@ -1,4 +1,4 @@
-class Activity
+class Activity < ActiveRecord::Base
   belongs_to :actor, :class_name => 'User'
-  validates_presence_of :action
+  belongs_to :subject, :polymorphic=>true
 end

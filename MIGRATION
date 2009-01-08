@@ -1,0 +1,15 @@
+class AddActivities < ActiveRecord::Migration
+  def self.up
+    create_table :activities do |t|
+      t.integer :actor_id, :null=>false
+      t.integer :subject_id, :null=>false
+      t.string :subject_type, :null=>false
+      t.string :action, :null=>false
+      t.timestamp :created_at, :null=>false
+    end
+  end
+
+  def self.down
+    drop_table :activities
+  end
+end

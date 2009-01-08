@@ -1,19 +1,19 @@
 Problem
 =======
  - Activity loggin should not invole the controller
+ - Activity loggin should be dead-simple
 
 Solution
 ========
  - Build activity loggin on top of userstamps plugin
-
-Install
-=======
-`script/plugin install git://github.com/grosser/record_activities.git`
+ - Simple Activity(:action,:actor,:subject) stored to database
 
 Setup
 =====
-Install and setup [userstamp](http://github.com/delynn/userstamp)
-Create an activities table in your database with `user_id` and string action.
+ - Install and setup [userstamp](http://github.com/delynn/userstamp)
+ - `script/plugin install git://github.com/grosser/record_activities.git`
+ - Create an activities table for your database (see: MIGRATION)
+ - Add `has_many :activities` to your user
 
 Usage
 =====
@@ -22,6 +22,12 @@ Usage
       stampable
       record_activities #same as record_activities  :create, :update
     end
+    User.first.activities.find(:all,:conditions=>{:action=>'create'})
 
-    Activity.find(:all,:conditions=>{:user_id=>12,:action=>'create')
-    or user has_many :activities in your user.rb
+    You may also use anything other than :create/:update/:save, but be sure to call the appropriate
+    callback (model.record_activity_foo) when the action was performed.
+
+TODO
+====
+ - Make it work with other models except User ?
+ - Make userstamps into a gem and the add tests to this project...
