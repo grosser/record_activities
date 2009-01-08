@@ -13,7 +13,7 @@ Setup
  - Install and setup [userstamp](http://github.com/delynn/userstamp)
  - `script/plugin install git://github.com/grosser/record_activities.git`
  - Create an activities table for your database (see: MIGRATION)
- - Add `has_many :activities` to your user
+ - Add `has_many :activities, :dependent=>:destroy, :foreign_key => :actor_id` to your user
 
 Usage
 =====
