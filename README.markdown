@@ -1,6 +1,6 @@
 Problem
 =======
- - Activity loggin should not invole the controller
+ - Activity loggin should not involve the controller
  - Activity loggin should be dead-simple
 
 Solution
