@@ -6,6 +6,7 @@ ActiveRecord::Schema.define(:version => 1) do
   create_table "users" do |t|
   end
   create_table "comments" do |t|
+    t.string :text, :null=>false
   end
   create_table "activities" do |t|
     t.integer :actor_id, :null=>false
@@ -21,6 +22,8 @@ class User < ActiveRecord::Base
   model_stamper
 end
 class Comment < ActiveRecord::Base
+  validates_presence_of :text
   stampable
   record_activities
 end
+require 'activity'
