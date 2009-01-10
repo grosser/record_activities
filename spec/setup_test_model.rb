@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 end
 
-#create model
+#create models
 class User < ActiveRecord::Base
   model_stamper
 end
@@ -25,5 +25,11 @@ class Comment < ActiveRecord::Base
   validates_presence_of :text
   stampable
   record_activities
+end
+#same but with custom activities
+class Comment2 < ActiveRecord::Base
+  set_table_name :comments
+  stampable
+  record_activities :foo, :bar
 end
 require 'activity'
