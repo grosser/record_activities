@@ -1,5 +1,7 @@
 class ActiveRecord::Base
   def self.record_activities(*actions)
+    options = actions.extract_options!
+    has_many :activities, :dependent=>options[:dependent], :as=>:subject if options[:dependent]
     actions = [:create,:update] if actions.empty?
     actions.each do |action|
       method = "record_activity_#{action}".to_sym

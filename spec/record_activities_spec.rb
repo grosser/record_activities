@@ -43,4 +43,11 @@ describe :record_activities do
       Activity.first.action.should == 'foo'
     end
   end
+  describe "destroying a subject" do
+    it "removes all activities" do
+      x = Comment2.create!(:text=>'x')
+      x.record_activity_foo
+      lambda{x.destroy}.should change(Activity,:count).by(-1)
+    end
+  end
 end

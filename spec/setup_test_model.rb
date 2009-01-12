@@ -30,6 +30,6 @@ end
 class Comment2 < ActiveRecord::Base
   set_table_name :comments
   stampable
-  record_activities :foo, :bar
+  record_activities :foo, :bar, :dependent=>:destroy
 end
 require 'activity'

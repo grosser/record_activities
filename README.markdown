@@ -20,7 +20,9 @@ Usage
 
     class Comment < ActiveRecord::Base
       stampable
-      record_activities #same as record_activities  :create, :update
+      record_activities :dependent=>:destroy 
+      #same as record_activities  :create, :update, :dependent=>:destroy
+      #without dependent option, there will be no comment.activities
     end
     Comment.create! --> Activity(:subject=>comment,:actor=>current_user,:action=>'create')
 
