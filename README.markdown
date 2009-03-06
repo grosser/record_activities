@@ -1,30 +1,29 @@
 Problem
 =======
- - Activity loggin should not involve the controller
- - Activity loggin should be dead-simple
+ - Activity logging should not involve the controller
+ - Activity logging should be dead-simple
 
 Solution
 ========
- - Build activity loggin on top of [userstamps](http://github.com/delynn/userstamp) plugin
- - Simple Activity(:action,:actor,:subject) stored to database
+ - Build activity logging on top of [userstamps](http://github.com/delynn/userstamp) plugin
+ - Simple Activity(:action, :actor, :subject) stored to database
 
 Setup
 =====
  - Install and setup [userstamps](http://github.com/delynn/userstamp)
  - `script/plugin install git://github.com/grosser/record_activities.git`
  - Create an activities table for your database (see: MIGRATION)
- - Add `has_many :activities, :dependent=>:destroy, :foreign_key => :actor_id` to your user
+ - Add `has_many :activities, :dependent => :destroy, :foreign_key => :actor_id` to your user
 
 Usage
 =====
 
     class Comment < ActiveRecord::Base
       stampable
-      record_activities :dependent=>:destroy 
-      #same as record_activities  :create, :update, :dependent=>:destroy
-      #without dependent option, there will be no comment.activities
+      record_activities :dependent => :destroy 
+      #same as record_activities  :create, :update, :dependent => :destroy
     end
-    Comment.create! --> Activity(:subject=>comment,:actor=>current_user,:action=>'create')
+    Comment.create! --> Activity(:subject => comment, :actor => current_user, :action => 'create')
 
     You may also use anything other than :create/:update/:save, but be sure to call the appropriate
     callback (model.record_activity_foo) when the action was performed.
