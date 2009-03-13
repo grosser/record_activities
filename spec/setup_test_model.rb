@@ -21,15 +21,25 @@ end
 class User < ActiveRecord::Base
   model_stamper
 end
+
 class Comment < ActiveRecord::Base
   validates_presence_of :text
   stampable
   record_activities
 end
-#same but with custom activities
+
+#like Comment but with custom activities
 class Comment2 < ActiveRecord::Base
   set_table_name :comments
   stampable
   record_activities :foo, :bar, :dependent=>:destroy
 end
+
+#like Comment but custom name for activities
+class Comment3 < ActiveRecord::Base
+  set_table_name :comments
+  stampable
+  record_activities :association=>:things_i_did
+end
+
 require 'activity'

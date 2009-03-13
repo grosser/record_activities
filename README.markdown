@@ -13,25 +13,28 @@ Setup
  - Install and setup [userstamps](http://github.com/delynn/userstamp)
  - `script/plugin install git://github.com/grosser/record_activities.git`
  - Create an activities table for your database (see: MIGRATION)
- - Add `has_many :activities, :dependent => :destroy, :foreign_key => :actor_id` to your user
+ - (Optional) Add `has_many :activities, :dependent => :destroy, :foreign_key => :actor_id` to your user
 
 Usage
 =====
 
     class Comment < ActiveRecord::Base
       stampable
-      record_activities :dependent => :destroy 
-      #same as record_activities  :create, :update, :dependent => :destroy
+      record_activities :dependent => :destroy
     end
     Comment.create! --> Activity(:subject => comment, :actor => current_user, :action => 'create')
 
-    You may also use anything other than :create/:update/:save, but be sure to call the appropriate
-    callback (model.record_activity_foo) when the action was performed.
+`record_activities` is the same as `record_activities :create, :update`.  
+You may also use anything other than the supported `:create / :update / :save`, but be sure to call the appropriate  
+callback `model.record_activity_foo` when the action `foo` was performed.
+
+A Comment `has_many :activities`, if the :association or :dependent option is given:
+    record_activities :dependent => :destroy
+    record_activities :association => :something_else    #this will use nullify, so your activities will not be cleaned up
 
 TODO
 ====
  - Make it work with other models except User ?
- - Make userstamps into a gem and the add tests to this project...
 
 AUTHOR
 ======

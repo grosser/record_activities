@@ -12,18 +12,28 @@ describe :record_activities do
       lambda{Comment.create!(:text=>'x')}.should change(Activity,:count).by(+1)
     end
 
-    it "does not record an activity when a record fails to e created" do
+    it "does not record an activity when a record fails to be created" do
       lambda{Comment.create}.should change(Activity,:count).by(0)
     end
   end
 
   describe 'validations' do
-    subject {Activity.new(:action=>'something',:actor_id=>1)}
+    subject {Activity.new(:action=>'something')}
     it {should be_valid}
 
     it "is not valid without an action" do
       subject.action=nil
       should_not be_valid
+    end
+  end
+
+  describe 'has many activities' do
+    it "associated has many activities" do
+      Comment2.new.activities.should == []
+    end
+
+    it "associated has many custom named activities" do
+      Comment3.new.things_i_did.should == []
     end
   end
 
