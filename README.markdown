@@ -38,8 +38,12 @@ TODO
 ====
  - Make it work with other models except User ?
 
-AUTHOR
-======
+AUTHORS
+=======
+###Contributors
+ - [rxcfc](http://in.finitu.de/)
+
+###Author
 Michael Grosser  
 grosser.michael@gmail.com  
 Hereby placed under public domain, do what you want, just do not hold me accountable...  
