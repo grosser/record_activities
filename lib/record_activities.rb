@@ -13,6 +13,7 @@ class ActiveRecord::Base
     actions.each do |action|
       method = "record_activity_#{action}".to_sym
       define_method method do
+        return unless self.class.record_userstamp
         Activity.create(:actor_id => self.class.stamper_class.stamper, :subject => self, :action => action.to_s)
       end
       send("after_#{action}",method) if respond_to?("after_#{action}")

@@ -32,6 +32,8 @@ A Comment `has_many :activities`, if the :association or :dependent option is gi
     record_activities :dependent => :destroy
     record_activities :association => :something_else    #this will use nullify, so your activities will not be cleaned up
 
+Activity recording can be turned off by setting e.g. `Comment.record_userstamp` to false.
+
 TODO
 ====
  - Make it work with other models except User ?

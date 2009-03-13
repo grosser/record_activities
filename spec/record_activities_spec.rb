@@ -4,16 +4,26 @@ describe :record_activities do
   before do
     Activity.delete_all
     Comment.delete_all
+    Comment.record_userstamp = true
     User.stamper = User.create!
   end
 
   describe "basics" do
+    def create_valid_comment
+      Comment.create!(:text=>'x')
+    end
+
     it "records an activity when a record is created" do
-      lambda{Comment.create!(:text=>'x')}.should change(Activity,:count).by(+1)
+      lambda{create_valid_comment}.should change(Activity,:count).by(+1)
     end
 
     it "does not record an activity when a record fails to be created" do
       lambda{Comment.create}.should change(Activity,:count).by(0)
+    end
+
+    it "does not record an activity when record_userstamp is set to false" do
+      Comment.record_userstamp = false
+      lambda{create_valid_comment}.should change(Activity,:count).by(0)
     end
   end
 
