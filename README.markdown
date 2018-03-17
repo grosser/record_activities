@@ -1,17 +1,18 @@
- - Simple activity logging build on top of [userstamp](http://github.com/delynn/userstamp)
+# Record Activities
+
+- Simple activity logging build on top of [userstamp](http://github.com/delynn/userstamp)
  - Does not involve the controller
  - Stores an Activity(:action, :actor, :subject) in the database
  - Supports :create, :update, :save and :destroy by default + any user-defined action
 
-Setup
-=====
+## Setup
+
  - Install and setup [userstamps](http://github.com/delynn/userstamp)
  - ` script/plugin install git://github.com/grosser/record_activities.git `
  - Create an activities table for your database (see: [MIGRATION](http://github.com/grosser/record_activities/blob/master/MIGRATION))
  - (Optional) Add `has_many :activities, :dependent => :destroy, :foreign_key => :actor_id` to your user
 
-Usage
-=====
+## Usage
 
     class Comment < ActiveRecord::Base
       stampable
@@ -29,12 +30,15 @@ A Comment `has_many :activities`, if the :association or :dependent option is gi
 
 Activity recording can be turned off by setting e.g. `Comment.record_userstamp` to false.
 
-AUTHORS
-=======
-###Contributors
+## AUTHORS
+
+### Contributors
+
  - [rxcfc](http://in.finitu.de/)
 
-###Author
+### Author
+
 [Michael Grosser](http://pragmatig.wordpress.com)  
-grosser.michael@gmail.com  
+grosser.michael@gmail.com 
+
 Hereby placed under public domain, do what you want, just do not hold me accountable...  
